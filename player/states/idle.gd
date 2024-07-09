@@ -4,11 +4,14 @@ extends State
 @export var player: Player
 @export var sprite: AnimatedSprite2D
 
-func enter():
-	player.velocity = Vector2.ZERO
-
 func update(delta: float):
 	sprite.play("idle")
 	
-	if Input.is_action_just_pressed("Left") or Input.is_action_just_pressed("Right"):
-		transition_state.emit(self, "run")
+	player.process_gravity(delta)
+	player.process_horizontal_drag(delta, player.IDLE_DRAG_MULTIPLIER)
+	
+	if Utils.boolean_xor(Input.is_action_pressed("Left"), Input.is_action_pressed("Right")):
+		transition_state.emit(self, "walk")
+	
+	if Input.is_action_just_pressed("Up"):
+		transition_state.emit(self, "jump")

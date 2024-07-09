@@ -32,6 +32,6 @@ func _on_state_transition(old_state: State, new_state: String):
 	transition_to_state.enter()
 	current_state = transition_to_state
 
-func _process(delta):
+func _physics_process(delta):
 	if current_state is State:
 		current_state.update(delta)
