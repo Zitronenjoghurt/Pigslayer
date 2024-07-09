@@ -1,0 +1,98 @@
+[gd_scene load_steps=15 format=3 uid="uid://c1h0lsfq0j2cm"]
+
+[ext_resource type="Script" path="res://scripts/level_objects/door.gd" id="1_soj2n"]
+[ext_resource type="Texture2D" uid="uid://51kd06xo68dw" path="res://assets/11-Door/Closiong (46x56).png" id="1_wfl4a"]
+[ext_resource type="Texture2D" uid="uid://du7n2y5il6nwe" path="res://assets/11-Door/Idle.png" id="2_jtor1"]
+[ext_resource type="Texture2D" uid="uid://cak8227k10nhl" path="res://assets/11-Door/Opening (46x56).png" id="3_2rdu6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2xlw"]
+atlas = ExtResource("1_wfl4a")
+region = Rect2(0, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w4hwq"]
+atlas = ExtResource("1_wfl4a")
+region = Rect2(46, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t7tfd"]
+atlas = ExtResource("1_wfl4a")
+region = Rect2(92, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ja2e"]
+atlas = ExtResource("2_jtor1")
+region = Rect2(0, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltina"]
+atlas = ExtResource("3_2rdu6")
+region = Rect2(0, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbd31"]
+atlas = ExtResource("3_2rdu6")
+region = Rect2(46, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_efiuk"]
+atlas = ExtResource("3_2rdu6")
+region = Rect2(92, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c3usv"]
+atlas = ExtResource("3_2rdu6")
+region = Rect2(138, 0, 46, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja2jb"]
+atlas = ExtResource("3_2rdu6")
+region = Rect2(184, 0, 46, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5wnul"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2xlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w4hwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t7tfd")
+}],
+"loop": false,
+"name": &"closing",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ja2e")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ltina")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbd31")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_efiuk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c3usv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ja2jb")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 10.0
+}]
+
+[node name="Door" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_5wnul")
+animation = &"closing"
+frame = 2
+frame_progress = 1.0
+script = ExtResource("1_soj2n")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 12)

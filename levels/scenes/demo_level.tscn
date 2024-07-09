@@ -1,11 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://crceo2qhp2kbw"]
+[gd_scene load_steps=12 format=3 uid="uid://crceo2qhp2kbw"]
 
-[ext_resource type="Texture2D" uid="uid://01o0yay4gt7s" path="res://assets/14-TileSets/Terrain (32x32).png" id="1_jqw0q"]
-[ext_resource type="Texture2D" uid="uid://bv0esmvr26p4m" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_1kxe3"]
-[ext_resource type="PackedScene" uid="uid://kmma1hb4vg8b" path="res://player/Player.tscn" id="3_psyeu"]
+[ext_resource type="Texture2D" uid="uid://01o0yay4gt7s" path="res://assets/14-TileSets/Terrain (32x32).png" id="1_ory2i"]
+[ext_resource type="Script" path="res://levels/level.gd" id="1_owh34"]
+[ext_resource type="Script" path="res://scripts/datastructures/camera_limits.gd" id="2_4hx6n"]
+[ext_resource type="Texture2D" uid="uid://bv0esmvr26p4m" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_v6pt1"]
+[ext_resource type="Script" path="res://scripts/datastructures/level_data.gd" id="3_66itb"]
+[ext_resource type="PackedScene" uid="uid://c1h0lsfq0j2cm" path="res://scenes/level_objects/door.tscn" id="6_2t3v3"]
+
+[sub_resource type="Resource" id="Resource_q0e53"]
+script = ExtResource("2_4hx6n")
+limit_top = 0
+limit_left = 0
+limit_right = 640
+limit_bottom = 384
+
+[sub_resource type="Resource" id="Resource_1kjld"]
+script = ExtResource("3_66itb")
+camera_limits = SubResource("Resource_q0e53")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bqm4s"]
-texture = ExtResource("1_jqw0q")
+texture = ExtResource("1_ory2i")
 texture_region_size = Vector2i(32, 32)
 2:2/0 = 0
 2:2/0/terrain_set = 1
@@ -902,7 +916,7 @@ texture_region_size = Vector2i(32, 32)
 16:1/0/terrains_peering_bit/top_side = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ib5jv"]
-texture = ExtResource("2_1kxe3")
+texture = ExtResource("2_v6pt1")
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
@@ -1102,7 +1116,10 @@ terrain_set_1/terrain_0/color = Color(0.392157, 1, 0.215686, 1)
 sources/0 = SubResource("TileSetAtlasSource_bqm4s")
 sources/1 = SubResource("TileSetAtlasSource_ib5jv")
 
-[node name="DemoLevel" type="Node2D"]
+[node name="DemoLevel" type="Node2D" node_paths=PackedStringArray("entrance_door")]
+script = ExtResource("1_owh34")
+data = SubResource("Resource_1kjld")
+entrance_door = NodePath("Door")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vj6df")
@@ -1114,5 +1131,5 @@ layer_1/tile_data = PackedInt32Array()
 layer_2/name = "Foreground"
 layer_2/tile_data = PackedInt32Array(720901, 131072, 5, 720900, 131072, 5, 720899, 131072, 5, 720898, 131072, 5, 720897, 131072, 5, 720896, 1048576, 5, 655360, 327680, 2, 589824, 327680, 2, 524288, 327680, 2, 458752, 327680, 2, 393216, 327680, 2, 327680, 327680, 2, 262144, 327680, 2, 196608, 327680, 2, 131072, 327680, 2, 65536, 327680, 2, 0, 1048576, 4, 1, 131072, 5, 2, 131072, 5, 3, 131072, 5, 4, 131072, 5, 5, 131072, 5, 6, 131072, 5, 7, 131072, 5, 8, 131072, 5, 9, 131072, 5, 10, 131072, 5, 11, 131072, 5, 12, 131072, 5, 13, 131072, 5, 14, 131072, 5, 15, 131072, 5, 16, 131072, 5, 17, 131072, 5, 18, 131072, 5, 19, 1114112, 4, 65555, 327680, 2, 131091, 327680, 2, 196627, 327680, 2, 262163, 327680, 2, 327699, 327680, 2, 393235, 327680, 2, 589843, 327680, 2, 458771, 327680, 2, 524307, 327680, 2, 655379, 327680, 2, 720915, 1114112, 5, 720914, 131072, 5, 720913, 131072, 5, 720912, 131072, 5, 720911, 131072, 5, 720910, 131072, 5, 720909, 131072, 5, 720908, 131072, 5, 720907, 131072, 5, 720906, 131072, 5, 720905, 458752, 5, 720904, 131072, 3, 720903, 524288, 5, 720902, 131072, 5, 524296, 65536, 1, 589832, 65536, 2, 655367, 65536, 1, 655368, 524288, 2, 655369, 196608, 2, 589833, 196608, 2, 524297, 196608, 1, 458765, 65536, 3, 458766, 131072, 3, 393230, 131072, 1, 393231, 196608, 1, 458767, 196608, 3, 393229, 65536, 1, 196616, 65536, 1, 262152, 65536, 3, 262153, 524288, 1, 262154, 131072, 2, 196617, 131072, 1, 196618, 131072, 1, 196619, 196608, 1, 262155, 196608, 2, 327691, 196608, 3, 327690, 131072, 3, 327689, 65536, 3)
 
-[node name="Player" parent="." instance=ExtResource("3_psyeu")]
-position = Vector2(87, 320)
+[node name="Door" parent="." instance=ExtResource("6_2t3v3")]
+position = Vector2(66, 324)

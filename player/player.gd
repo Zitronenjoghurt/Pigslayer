@@ -2,21 +2,23 @@ class_name Player
 extends CharacterBody2D
 
 @export var WALK_ACCELERATION: float = 500.0
-@export var JUMP_ACCELERATION: float = 1500.0
+@export var INITIAL_JUMP_FORCE: float = 125.0
+@export var JUMP_ACCELERATION: float = 500.0
 @export var GRAVITY_MULTIPLIER: float = 1.75
 @export var HORIZONTAL_DRAG: float = 650.0
 @export var SLIPPERINESS: float = 0.0
 @export var SPRITE_FACING_LEFT_X_OFFSET: float = -14.0
-@export var RUNNING_ACCELERATION_MULTIPLIER: float = 1.6
-@export var RUNNING_MAX_SPEED_MULTIPLIER: float = 1.2
+@export var RUNNING_ACCELERATION_MULTIPLIER: float = 1.65
+@export var RUNNING_MAX_SPEED_MULTIPLIER: float = 1.3
 @export var MAXIMUM_SPEED: float = 200.0
 @export var TERMINAL_VELOCITY: float = 500.0
-@export var COYOTE_TIME_SEC: float = 0.2
+@export var COYOTE_TIME_SEC: float = 0.25
 @export var JUMP_BUFFER_TIME_SEC: float = 0.15
 @export var MAX_JUMP_TIME_SEC: float = 0.3
 @export var JUMP_MOVEMENT_FACTOR: float = 0.5
 @export var FALL_MOVEMENT_FACTOR: float = 0.5
 @export var IDLE_DRAG_MULTIPLIER: float = 3.0
+@export var INSTANT_TURN_AROUND: bool = true
 
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var camera: Camera2D = %Camera
@@ -37,10 +39,7 @@ func _physics_process(delta):
 	
 func on_spawn(properties: PlayerSpawnProperties):
 	global_position = properties.spawn_position
-	camera.limit_top = properties.camera_limit_top
-	camera.limit_left = properties.camera_limit_left
-	camera.limit_right = properties.camera_limit_right
-	camera.limit_bottom = properties.camera_limit_bottom
+	properties.camera_limits.apply_limits(camera)
 
 func update_facing_direction():
 	if velocity.x > 0:
@@ -89,6 +88,13 @@ func process_gravity(delta: float, gravity_factor: float = 1.0):
 # Returns true when movement was detected
 func process_horizontal_movement(delta: float, acceleration_factor: float = 1.0) -> bool:
 	var direction = Input.get_axis("Left", "Right")
+	
+	if INSTANT_TURN_AROUND:
+		if direction == 1 and velocity.x < 0:
+			velocity.x = 0
+		elif direction == -1 and velocity.x > 0:
+			velocity.x = 0
+	
 	if direction:
 		velocity.x += delta * direction * WALK_ACCELERATION * acceleration_factor
 		return true

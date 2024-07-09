@@ -8,7 +8,7 @@ var _jump_timer: float = 0.0
 
 func enter():
 	player.reset_jump_buffer()
-	player.velocity.y = 0
+	player.velocity.y = -player.INITIAL_JUMP_FORCE
 	player.jumps_since_last_on_floor += 1
 	_jump_timer = 0.0
 
