@@ -11,6 +11,7 @@ func enter():
 	player.velocity.y = -player.INITIAL_JUMP_FORCE
 	player.jumps_since_last_on_floor += 1
 	_jump_timer = 0.0
+	player.activate_jump_particles()
 
 func update(delta: float):
 	sprite.play("jump")
@@ -35,3 +36,6 @@ func update(delta: float):
 	if Input.is_action_pressed("Run"):
 		max_speed_factor = player.RUNNING_MAX_SPEED_MULTIPLIER
 	player.process_speed_limit(max_speed_factor)
+
+func exit():
+	player.deactivate_jump_particles()

@@ -22,6 +22,7 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var camera: Camera2D = %Camera
+@onready var jump_particles: CPUParticles2D = %JumpParticles
 
 enum FacingDirection {
 	LEFT,
@@ -74,25 +75,25 @@ func reset_jump_buffer():
 func is_jump_buffer_active() -> bool:
 	return _jump_buffer > 0.0
 
-func process_speed_limit(maximum_speed_factor: float = 1.0):
+func process_speed_limit(maximum_speed_factor: float=1.0):
 	velocity = Physics.limit_vector_x(velocity, MAXIMUM_SPEED * maximum_speed_factor)
 	velocity = Physics.limit_vector_y(velocity, TERMINAL_VELOCITY)
 
-func process_horizontal_drag(delta: float, drag_factor: float = 1.0, max_speed_factor: float = 1.0):
+func process_horizontal_drag(delta: float, drag_factor: float=1.0, max_speed_factor: float=1.0):
 	velocity = Physics.apply_exp_decay_drag_x(delta, velocity, HORIZONTAL_DRAG * drag_factor, MAXIMUM_SPEED * max_speed_factor, SLIPPERINESS)
 
-func process_gravity(delta: float, gravity_factor: float = 1.0):
+func process_gravity(delta: float, gravity_factor: float=1.0):
 	if not is_on_floor():
 		velocity = Physics.apply_gravity(delta, velocity, GRAVITY_MULTIPLIER * gravity_factor)
 
 # Returns true when movement was detected
-func process_horizontal_movement(delta: float, acceleration_factor: float = 1.0) -> bool:
+func process_horizontal_movement(delta: float, acceleration_factor: float=1.0) -> bool:
 	var direction = Input.get_axis("Left", "Right")
 	
 	if INSTANT_TURN_AROUND:
 		if direction == 1 and velocity.x < 0:
 			velocity.x = 0
-		elif direction == -1 and velocity.x > 0:
+		elif direction == - 1 and velocity.x > 0:
 			velocity.x = 0
 	
 	if direction:
@@ -100,5 +101,12 @@ func process_horizontal_movement(delta: float, acceleration_factor: float = 1.0)
 		return true
 	return false
 
-func process_jump(delta: float, acceleration_factor: float = 1.0):
+func process_jump(delta: float, acceleration_factor: float=1.0):
 	velocity.y -= delta * JUMP_ACCELERATION * acceleration_factor
+
+# VISUALS
+func activate_jump_particles():
+	jump_particles.emitting = true
+
+func deactivate_jump_particles():
+	jump_particles.emitting = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://kmma1hb4vg8b"]
+[gd_scene load_steps=47 format=3 uid="uid://kmma1hb4vg8b"]
 
 [ext_resource type="Texture2D" uid="uid://dkqv3c7afoxlk" path="res://assets/01-King Human/Hit (78x58).png" id="1_6fc2x"]
 [ext_resource type="Script" path="res://player/player.gd" id="1_jay7c"]
@@ -245,6 +245,21 @@ animations = [{
 radius = 9.0
 height = 26.0
 
+[sub_resource type="Curve" id="Curve_2mitq"]
+_data = [Vector2(0.0116279, 0.995227), 0.0, 0.0, 0, 0, Vector2(0.622093, 0.743819), 0.0, 0.0, 0, 0, Vector2(0.986919, 0.497185), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_xh0wr"]
+_data = [Vector2(0.49564, 0.0731851), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_sork7"]
+_data = [Vector2(0.510174, 1), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Gradient" id="Gradient_q77vr"]
+colors = PackedColorArray(1, 1, 1, 0.482353, 1, 1, 1, 0)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_jay7c")
 
@@ -295,3 +310,24 @@ sprite = NodePath("../../Sprite")
 script = ExtResource("11_y8qch")
 player = NodePath("../..")
 sprite = NodePath("../../Sprite")
+
+[node name="JumpParticles" type="CPUParticles2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(0, -16)
+emitting = false
+amount = 5
+lifetime = 0.5
+speed_scale = 3.0
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+gravity = Vector2(2.08165e-12, 100)
+scale_amount_min = 0.2
+scale_amount_max = 15.0
+scale_amount_curve = SubResource("Curve_2mitq")
+split_scale = true
+scale_curve_x = SubResource("Curve_xh0wr")
+scale_curve_y = SubResource("Curve_sork7")
+color = Color(1, 1, 1, 0.509804)
+color_ramp = SubResource("Gradient_q77vr")
