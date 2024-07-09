@@ -1,16 +1,16 @@
 class_name Player
 extends CharacterBody2D
 
-@export var WALK_ACCELERATION: float = 500.0
+@export var WALK_ACCELERATION: float = 400.0
 @export var INITIAL_JUMP_FORCE: float = 125.0
 @export var JUMP_ACCELERATION: float = 500.0
-@export var GRAVITY_MULTIPLIER: float = 1.75
+@export var GRAVITY_MULTIPLIER: float = 1.65
 @export var HORIZONTAL_DRAG: float = 650.0
 @export var SLIPPERINESS: float = 0.0
 @export var SPRITE_FACING_LEFT_X_OFFSET: float = -14.0
-@export var RUNNING_ACCELERATION_MULTIPLIER: float = 1.65
-@export var RUNNING_MAX_SPEED_MULTIPLIER: float = 1.3
-@export var MAXIMUM_SPEED: float = 200.0
+@export var RUNNING_ACCELERATION_MULTIPLIER: float = 1.75
+@export var RUNNING_MAX_SPEED_MULTIPLIER: float = 1.35
+@export var MAXIMUM_SPEED: float = 150.0
 @export var TERMINAL_VELOCITY: float = 500.0
 @export var COYOTE_TIME_SEC: float = 0.25
 @export var JUMP_BUFFER_TIME_SEC: float = 0.15
