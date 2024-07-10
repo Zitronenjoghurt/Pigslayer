@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://crceo2qhp2kbw"]
+[gd_scene load_steps=13 format=3 uid="uid://crceo2qhp2kbw"]
 
 [ext_resource type="Texture2D" uid="uid://01o0yay4gt7s" path="res://assets/14-TileSets/Terrain (32x32).png" id="1_ory2i"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_owh34"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bv0esmvr26p4m" path="res://assets/14-TileSets/Decorations (32x32).png" id="2_v6pt1"]
 [ext_resource type="Script" path="res://scripts/datastructures/level_data.gd" id="3_66itb"]
 [ext_resource type="PackedScene" uid="uid://c1h0lsfq0j2cm" path="res://scenes/level_objects/door.tscn" id="6_2t3v3"]
+[ext_resource type="PackedScene" uid="uid://c5ov7d5ug78gy" path="res://enemies/pig/Pig.tscn" id="7_tw7m2"]
 
 [sub_resource type="Resource" id="Resource_q0e53"]
 script = ExtResource("2_4hx6n")
@@ -1133,3 +1134,6 @@ layer_2/tile_data = PackedInt32Array(720901, 131072, 5, 720900, 131072, 5, 72089
 
 [node name="Door" parent="." instance=ExtResource("6_2t3v3")]
 position = Vector2(66, 324)
+
+[node name="Pig" parent="." instance=ExtResource("7_tw7m2")]
+position = Vector2(465, 192)

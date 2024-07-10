@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PigConfig" load_steps=2 format=3 uid="uid://fifcxjkhhq6p"]
+
+[ext_resource type="Script" path="res://scripts/datastructures/pig_config.gd" id="1_dharo"]
+
+[resource]
+script = ExtResource("1_dharo")
+SPRITE_FACING_RIGHT_X_OFFSET = 6.0
+GRAVITY_MULTIPLIER = 1.0
+INTELLIGENCE = 50.0

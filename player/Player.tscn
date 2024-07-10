@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://player/player.gd" id="1_jay7c"]
 [ext_resource type="Texture2D" uid="uid://cpqw2lwhpbhxy" path="res://assets/01-King Human/Idle (78x58).png" id="1_l45xb"]
 [ext_resource type="Texture2D" uid="uid://cy7n18fla6y38" path="res://assets/01-King Human/Attack (78x58).png" id="1_vdjw5"]
-[ext_resource type="Resource" uid="uid://ddoxmurqvi0j1" path="res://resources/player_configs/default_config.tres" id="2_wyjy5"]
+[ext_resource type="Resource" uid="uid://ddoxmurqvi0j1" path="res://player/configs/default_config.tres" id="2_wyjy5"]
 [ext_resource type="Texture2D" uid="uid://ciuu4kv57mlx6" path="res://assets/01-King Human/Run (78x58).png" id="2_ydxif"]
 [ext_resource type="Texture2D" uid="uid://x1u3negexfre" path="res://assets/01-King Human/Fall (78x58).png" id="4_luuxx"]
 [ext_resource type="Texture2D" uid="uid://bt7sm258m7ier" path="res://assets/01-King Human/Jump (78x58).png" id="5_opyp3"]
@@ -262,13 +262,12 @@ point_count = 1
 colors = PackedColorArray(1, 1, 1, 0.482353, 1, 1, 1, 0)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_jay7c")
 config = ExtResource("2_wyjy5")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
-z_index = 1
-y_sort_enabled = true
 position = Vector2(8, -14)
 sprite_frames = SubResource("SpriteFrames_k4ijj")
 animation = &"land"

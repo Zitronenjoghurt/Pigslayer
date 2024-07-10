@@ -1,0 +1,131 @@
+[gd_scene load_steps=19 format=3 uid="uid://c5ov7d5ug78gy"]
+
+[ext_resource type="Script" path="res://enemies/pig/pig.gd" id="1_43h0a"]
+[ext_resource type="Resource" uid="uid://fifcxjkhhq6p" path="res://enemies/pig/configs/default_config.tres" id="2_em8gn"]
+[ext_resource type="Texture2D" uid="uid://dhwl0jvlfq6u2" path="res://assets/03-Pig/Idle (34x28).png" id="2_fpnar"]
+[ext_resource type="Script" path="res://scripts/state_machine/state_machine.gd" id="4_rk5t1"]
+[ext_resource type="Script" path="res://enemies/pig/states/idle.gd" id="5_6thnq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqvxy"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(0, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urmq1"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(34, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yak8"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(68, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooyse"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(102, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nadh4"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(136, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxijl"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(170, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hl5mi"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(204, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_boja8"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(238, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02afr"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(272, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23q3k"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(306, 0, 34, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cqi4"]
+atlas = ExtResource("2_fpnar")
+region = Rect2(340, 0, 34, 28)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gi15r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqvxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urmq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yak8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooyse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nadh4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxijl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hl5mi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_boja8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02afr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23q3k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cqi4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ua7oa"]
+size = Vector2(18, 16)
+
+[node name="Pig" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+z_index = 1
+script = ExtResource("1_43h0a")
+config = ExtResource("2_em8gn")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(-3, -14)
+sprite_frames = SubResource("SpriteFrames_gi15r")
+animation = &"idle"
+frame = 10
+frame_progress = 0.753182
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_ua7oa")
+
+[node name="FSM" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("4_rk5t1")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FSM" node_paths=PackedStringArray("pig")]
+script = ExtResource("5_6thnq")
+pig = NodePath("../..")
+
+[node name="DetectRangeLeft" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectRangeLeft"]
+polygon = PackedVector2Array(0, -11, -9, -16, -80, -40, -80, 16, -9, 0)
+
+[node name="DetectRangeRight" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectRangeRight"]
+position = Vector2(0, -3.8147e-06)
+polygon = PackedVector2Array(0, -11, 9, -16, 80, -40, 80, 16, 9, 3.8147e-06)
