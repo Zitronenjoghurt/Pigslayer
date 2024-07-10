@@ -15,8 +15,8 @@ func update(delta: float):
 	var acceleration_factor: float = 1.0
 	var max_speed_factor: float = 1.0
 	if Input.is_action_pressed("Run"):
-		acceleration_factor = player.RUNNING_ACCELERATION_MULTIPLIER
-		max_speed_factor = player.RUNNING_MAX_SPEED_MULTIPLIER
+		acceleration_factor = player.config.RUNNING_ACCELERATION_MULTIPLIER
+		max_speed_factor = player.config.RUNNING_MAX_SPEED_MULTIPLIER
 	
 	var has_moved = player.process_horizontal_movement(delta, acceleration_factor)
 	player.process_speed_limit(max_speed_factor)
@@ -35,9 +35,9 @@ func update(delta: float):
 	else:
 		_coyote_timer = 0.0
 
-	if _coyote_timer <= player.COYOTE_TIME_SEC and player.is_jump_buffer_active():
+	if _coyote_timer <= player.config.COYOTE_TIME_SEC and player.is_jump_buffer_active():
 		transition_state.emit(self, "jump")
 		return
 	
-	if _coyote_timer > player.COYOTE_TIME_SEC:
+	if _coyote_timer > player.config.COYOTE_TIME_SEC:
 		transition_state.emit(self, "fall")

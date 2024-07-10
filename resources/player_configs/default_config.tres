@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="PlayerConfig" load_steps=2 format=3 uid="uid://ddoxmurqvi0j1"]
+
+[ext_resource type="Script" path="res://scripts/datastructures/player_config.gd" id="1_4wvxn"]
+
+[resource]
+script = ExtResource("1_4wvxn")
+WALK_ACCELERATION = 400.0
+INITIAL_JUMP_FORCE = 125.0
+JUMP_ACCELERATION = 500.0
+GRAVITY_MULTIPLIER = 1.65
+HORIZONTAL_DRAG = 650.0
+SLIPPERINESS = 0.0
+SPRITE_FACING_LEFT_X_OFFSET = -14.0
+RUNNING_ACCELERATION_MULTIPLIER = 1.75
+RUNNING_MAX_SPEED_MULTIPLIER = 1.35
+MAXIMUM_SPEED = 150.0
+TERMINAL_VELOCITY = 500.0
+COYOTE_TIME_SEC = 0.25
+JUMP_BUFFER_TIME_SEC = 0.15
+MAX_JUMP_TIME_SEC = 0.3
+JUMP_MOVEMENT_FACTOR = 0.5
+FALL_MOVEMENT_FACTOR = 0.5
+IDLE_DRAG_MULTIPLIER = 3.0
+INSTANT_TURN_AROUND = true
