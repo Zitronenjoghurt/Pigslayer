@@ -94,11 +94,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ua7oa"]
 size = Vector2(18, 16)
 
-[node name="Pig" type="CharacterBody2D" node_paths=PackedStringArray("sprite")]
+[node name="Pig" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "left_vision_areas", "right_vision_areas")]
 z_index = 1
 script = ExtResource("1_43h0a")
 config = ExtResource("2_em8gn")
 sprite = NodePath("Sprite")
+left_vision_areas = [NodePath("VisionRangeLeft")]
+right_vision_areas = [NodePath("VisionRangeRight")]
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(-3, -14)
@@ -119,13 +121,13 @@ initial_state = NodePath("Idle")
 script = ExtResource("5_6thnq")
 pig = NodePath("../..")
 
-[node name="DetectRangeLeft" type="Area2D" parent="."]
+[node name="VisionRangeLeft" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectRangeLeft"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionRangeLeft"]
 polygon = PackedVector2Array(0, -11, -9, -16, -80, -40, -80, 16, -9, 0)
 
-[node name="DetectRangeRight" type="Area2D" parent="."]
+[node name="VisionRangeRight" type="Area2D" parent="."]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DetectRangeRight"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VisionRangeRight"]
 position = Vector2(0, -3.8147e-06)
 polygon = PackedVector2Array(0, -11, 9, -16, 80, -40, 80, 16, 9, 3.8147e-06)

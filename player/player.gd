@@ -16,6 +16,9 @@ var current_facing_direction: FacingDirection = FacingDirection.RIGHT
 var jumps_since_last_on_floor: int = 0
 var _jump_buffer: float = 0.0
 
+func _ready():
+	add_to_group("player")
+
 func _physics_process(delta):
 	update_facing_direction()
 	process_jump_buffer(delta)
@@ -68,7 +71,7 @@ func process_horizontal_drag(delta: float, drag_factor: float=1.0, max_speed_fac
 func process_gravity(delta: float, gravity_factor: float=1.0):
 	if not is_on_floor():
 		velocity = Physics.apply_gravity(delta, velocity, config.GRAVITY_MULTIPLIER * gravity_factor)
-
+	
 # Returns true when movement was detected
 func process_horizontal_movement(delta: float, acceleration_factor: float=1.0) -> bool:
 	var direction = Input.get_axis("Left", "Right")
