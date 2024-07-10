@@ -20,8 +20,12 @@ func update(delta: float):
 		transition_state.emit(self, "fall")
 		return
 	
+	var max_jump_time = player.config.MAX_JUMP_TIME_SEC
+	if player.jumps_since_last_on_floor > 1:
+		max_jump_time *= player.config.FOLLOWUP_JUMP_MAX_JUMP_TIME_FACTOR
+	
 	_jump_timer += delta
-	if _jump_timer >= player.config.MAX_JUMP_TIME_SEC:
+	if _jump_timer >= max_jump_time:
 		transition_state.emit(self, "fall")
 		return
 	
